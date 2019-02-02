@@ -51,6 +51,15 @@ public class Fallador implements Serializable {
         this.idFallador = idFallador;
     }
 
+    public Fallador(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public Fallador(Integer idFallador, String descripcion) {
+        this.idFallador = idFallador;
+        this.descripcion = descripcion;
+    }
+
     public Integer getIdFallador() {
         return idFallador;
     }

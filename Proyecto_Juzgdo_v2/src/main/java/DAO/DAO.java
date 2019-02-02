@@ -76,48 +76,47 @@ public class DAO implements IDAO {
     }
 
     @Override
-    public Response guardar(Object objeto) {
+    public JSONObject guardar(Object objeto) {
         EntityManager manager = null;
-        JSONObject objRespuesta = new JSONObject();
+        JSONObject joRespuesta = new JSONObject();
         try {
             manager = getEntityManager();
             manager.getTransaction().begin();
             manager.persist(objeto);
             manager.getTransaction().commit();
-            objRespuesta.put("Registro", ((JSONObject)(new JSONParser().parse(new Gson().toJson(objeto)))));
-            objRespuesta.put("Resultado", true);
-            return Herramientas.construirResponse(objRespuesta.toString());
+            joRespuesta.put("Registro", ((JSONObject) (new JSONParser().parse(new Gson().toJson(objeto)))));
+            joRespuesta.put("Resultado", true);
         } catch (Exception e) {
+            joRespuesta.put("Resultado", false);
             System.err.println(e);
         } finally {
             if (manager != null) {
                 manager.close();
             }
         }
-        objRespuesta.put("Resultado", false);
-        return Herramientas.construirResponse(objRespuesta.toString());
+        return joRespuesta;
     }
 
     @Override
-    public Response modificar(Object objeto) {
+    public JSONObject modificar(Object objeto) {
         EntityManager manager = null;
-        JSONObject objRespuesta = new JSONObject();
+        JSONObject joRespuesta = new JSONObject();
         try {
             manager = getEntityManager();
             manager.getTransaction().begin();
             manager.merge(objeto);
             manager.getTransaction().commit();
-            objRespuesta.put("Resultado", true);
-            return Herramientas.construirResponse(objRespuesta.toString());
+            joRespuesta.put("Registro", ((JSONObject) (new JSONParser().parse(new Gson().toJson(objeto)))));
+            joRespuesta.put("Resultado", true);
         } catch (Exception e) {
+            joRespuesta.put("Resultado", false);
             System.err.println(e);
         } finally {
             if (manager != null) {
                 manager.close();
             }
         }
-        objRespuesta.put("Resultado", false);
-        return Herramientas.construirResponse(objRespuesta.toString());
+        return joRespuesta;
     }
 
     @Override
@@ -137,30 +136,30 @@ public class DAO implements IDAO {
     }
 
     @Override
-    public Response eliminar(Object obj, Class clase) {
+    public JSONObject eliminar(Object obj, Class clase) {
         EntityManager manager = null;
-        JSONObject objRespuesta = new JSONObject();
+        JSONObject joRespuesta = new JSONObject();
         try {
             manager = getEntityManager();
             manager.getTransaction().begin();
             Object objeto = manager.merge(obj);
             manager.remove(objeto);
             manager.getTransaction().commit();
-            objRespuesta.put("Resultado", true);
-            return Herramientas.construirResponse(objRespuesta.toString());
+            joRespuesta.put("Registro", ((JSONObject) (new JSONParser().parse(new Gson().toJson(obj)))));
+            joRespuesta.put("Resultado", true);
         } catch (Exception e) {
+            joRespuesta.put("Resultado", false);
             System.err.println(e);
         } finally {
             if (manager != null) {
                 manager.close();
             }
         }
-        objRespuesta.put("Resultado", false);
-        return Herramientas.construirResponse(objRespuesta.toString());
+        return joRespuesta;
     }
 
     @Override
-    public List cargarConsulta(String query,Class clase) {
+    public List cargarConsulta(String query, Class clase) {
         EntityManager manager = null;
         List lista = null;
 
@@ -169,7 +168,7 @@ public class DAO implements IDAO {
             Query result;
             if (clase != null) {
                 result = manager.createNativeQuery(query, clase);
-            }else{
+            } else {
                 result = manager.createNativeQuery(query);
             }
             lista = result.getResultList();

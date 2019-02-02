@@ -55,6 +55,10 @@ public class Ofendidos implements Serializable {
         this.descripcion = descripcion;
     }
 
+    public Ofendidos(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    
     public Integer getIdOfendidos() {
         return idOfendidos;
     }

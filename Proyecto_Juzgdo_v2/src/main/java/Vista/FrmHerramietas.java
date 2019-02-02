@@ -1,16 +1,18 @@
 package Vista;
 
+import Controlador.CtlAuditoria;
+import Controlador.CtlDelito;
+import Controlador.CtlDerechos;
+import Controlador.CtlFallador;
+import Controlador.CtlOfendido;
+import Controlador.CtlUsuario;
+import Modelo.Usuario;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.stream.Collectors;
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
-import org.json.simple.JSONObject;
 
 /**
  *
@@ -18,28 +20,36 @@ import org.json.simple.JSONObject;
  */
 public class FrmHerramietas extends javax.swing.JInternalFrame {
 
-//    private CtlFallador controladorFallador = new CtlFallador();
-//    private CtlOfendido controladorOfendido = new CtlOfendido();
-//    private CtlDerechos controladorDerechos = new CtlDerechos();
-//    private CtlAuditoria controladorAuditoria = new CtlAuditoria();
-//    private CtlDelitos controladorDelitos = new CtlDelitos();
-
-    public static ArrayList<JSONObject> lstAuditorias = new ArrayList<>();
+    private CtlFallador controladorFallador = new CtlFallador();
+    private CtlOfendido controladorOfendido = new CtlOfendido();
+    private CtlDerechos controladorDerechos = new CtlDerechos();
+    private CtlAuditoria controladorAuditoria = new CtlAuditoria();
+    private CtlDelito controladorDelitos = new CtlDelito();
+    private CtlUsuario controladorUsuario = new CtlUsuario();
 
     public FrmHerramietas() {
         initComponents();
         try {
             cerrarVentana();
             btnBuscarAuditoria.setEnabled(false);
+            btmEditarUsuarios.setEnabled(false);
+            btmEditarFallador.setEnabled(false);
+            btmEditarOfendido.setEnabled(false);
+            btmEditarDerecho.setEnabled(false);
+            btmEditarDelitos.setEnabled(false);
         } catch (Exception e) {
             System.out.println("[Error] : " + e);
         }
+        listar();
+        gbtnTipoUsuario.add(rbtnGeneral);
+        gbtnTipoUsuario.add(rbtnAdministrador);
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        gbtnTipoUsuario = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -81,7 +91,7 @@ public class FrmHerramietas extends javax.swing.JInternalFrame {
         rbAtributoCuatro = new javax.swing.JRadioButton();
         jScrollPane10 = new javax.swing.JScrollPane();
         txtDescripcionD = new javax.swing.JTextArea();
-        btnListarFalladores2 = new javax.swing.JButton();
+        btnListarDerechos = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -93,6 +103,9 @@ public class FrmHerramietas extends javax.swing.JInternalFrame {
         txtUsuario = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         txtNombreCompleto = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        rbtnAdministrador = new javax.swing.JRadioButton();
+        rbtnGeneral = new javax.swing.JRadioButton();
         jPanel7 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -157,7 +170,6 @@ public class FrmHerramietas extends javax.swing.JInternalFrame {
         }
 
         btmEditarFallador.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        btmEditarFallador.setIcon(new javax.swing.ImageIcon("C:\\tmp\\img\\editarr.png")); // NOI18N
         btmEditarFallador.setText("EDITAR");
         btmEditarFallador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,7 +178,6 @@ public class FrmHerramietas extends javax.swing.JInternalFrame {
         });
 
         btnRegistrarFallador.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        btnRegistrarFallador.setIcon(new javax.swing.ImageIcon("C:\\tmp\\img\\mas.png")); // NOI18N
         btnRegistrarFallador.setText("REGISTRAR");
         btnRegistrarFallador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -250,7 +261,6 @@ public class FrmHerramietas extends javax.swing.JInternalFrame {
         }
 
         btmEditarOfendido.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        btmEditarOfendido.setIcon(new javax.swing.ImageIcon("C:\\tmp\\img\\editarr.png")); // NOI18N
         btmEditarOfendido.setText("EDITAR");
         btmEditarOfendido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -259,7 +269,6 @@ public class FrmHerramietas extends javax.swing.JInternalFrame {
         });
 
         btnRegistrarOfendido.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        btnRegistrarOfendido.setIcon(new javax.swing.ImageIcon("C:\\tmp\\img\\mas.png")); // NOI18N
         btnRegistrarOfendido.setText("REGISTRAR");
         btnRegistrarOfendido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -357,7 +366,6 @@ public class FrmHerramietas extends javax.swing.JInternalFrame {
         }
 
         btmEditarDerecho.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        btmEditarDerecho.setIcon(new javax.swing.ImageIcon("C:\\tmp\\img\\editarr.png")); // NOI18N
         btmEditarDerecho.setText("EDITAR");
         btmEditarDerecho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -366,7 +374,6 @@ public class FrmHerramietas extends javax.swing.JInternalFrame {
         });
 
         btnRegistrarDerechos.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        btnRegistrarDerechos.setIcon(new javax.swing.ImageIcon("C:\\tmp\\img\\mas.png")); // NOI18N
         btnRegistrarDerechos.setText("REGISTRAR");
         btnRegistrarDerechos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -445,7 +452,6 @@ public class FrmHerramietas extends javax.swing.JInternalFrame {
         jScrollPane4.setViewportView(tblDelitos);
 
         btmEditarDelitos.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        btmEditarDelitos.setIcon(new javax.swing.ImageIcon("C:\\tmp\\img\\editarr.png")); // NOI18N
         btmEditarDelitos.setText("EDITAR");
         btmEditarDelitos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -454,7 +460,6 @@ public class FrmHerramietas extends javax.swing.JInternalFrame {
         });
 
         btnRegistrarDelitos.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        btnRegistrarDelitos.setIcon(new javax.swing.ImageIcon("C:\\tmp\\img\\mas.png")); // NOI18N
         btnRegistrarDelitos.setText("REGISTRAR");
         btnRegistrarDelitos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -487,10 +492,10 @@ public class FrmHerramietas extends javax.swing.JInternalFrame {
         txtDescripcionD.setRows(5);
         jScrollPane10.setViewportView(txtDescripcionD);
 
-        btnListarFalladores2.setText("Cargar Derechos");
-        btnListarFalladores2.addActionListener(new java.awt.event.ActionListener() {
+        btnListarDerechos.setText("Cargar Derechos");
+        btnListarDerechos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnListarFalladores2ActionPerformed(evt);
+                btnListarDerechosActionPerformed(evt);
             }
         });
 
@@ -516,7 +521,7 @@ public class FrmHerramietas extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(rbAtributoCuatro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnListarFalladores2, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                        .addComponent(btnListarDerechos, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(btnRegistrarDelitos)
                         .addGap(18, 18, 18)
@@ -546,7 +551,7 @@ public class FrmHerramietas extends javax.swing.JInternalFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnListarFalladores2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnListarDerechos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(btnRegistrarDelitos)
                                 .addComponent(btmEditarDelitos)))))
@@ -586,6 +591,11 @@ public class FrmHerramietas extends javax.swing.JInternalFrame {
                 "USUARIO", "CONTRASEÑA", "NOMBRE COMPLETO"
             }
         ));
+        tblUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblUsuariosMouseClicked(evt);
+            }
+        });
         jScrollPane5.setViewportView(tblUsuarios);
         if (tblUsuarios.getColumnModel().getColumnCount() > 0) {
             tblUsuarios.getColumnModel().getColumn(0).setResizable(false);
@@ -593,7 +603,6 @@ public class FrmHerramietas extends javax.swing.JInternalFrame {
         }
 
         btmEditarUsuarios.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        btmEditarUsuarios.setIcon(new javax.swing.ImageIcon("C:\\tmp\\img\\editarr.png")); // NOI18N
         btmEditarUsuarios.setText("EDITAR");
         btmEditarUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -602,7 +611,6 @@ public class FrmHerramietas extends javax.swing.JInternalFrame {
         });
 
         btnRegistrarUsuarios.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        btnRegistrarUsuarios.setIcon(new javax.swing.ImageIcon("C:\\tmp\\img\\mas.png")); // NOI18N
         btnRegistrarUsuarios.setText("REGISTRAR");
         btnRegistrarUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -632,17 +640,23 @@ public class FrmHerramietas extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel15.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel15.setText("TIPO DE USUARIO");
+
+        rbtnAdministrador.setBackground(new java.awt.Color(255, 153, 248));
+        rbtnAdministrador.setText("ADMINISTRADOR");
+
+        rbtnGeneral.setBackground(new java.awt.Color(255, 153, 248));
+        rbtnGeneral.setText("GENERAL");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane5)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtNombreCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11)
@@ -654,9 +668,19 @@ public class FrmHerramietas extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnRegistrarUsuarios)
                         .addGap(18, 18, 18)
-                        .addComponent(btmEditarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(285, Short.MAX_VALUE))
-            .addComponent(jScrollPane5)
+                        .addComponent(btmEditarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel15))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(rbtnAdministrador)
+                                .addGap(18, 18, 18)
+                                .addComponent(rbtnGeneral))
+                            .addComponent(txtNombreCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(337, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -678,8 +702,13 @@ public class FrmHerramietas extends javax.swing.JInternalFrame {
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(btmEditarUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
                         .addComponent(btnRegistrarUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(42, 42, 42)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(rbtnAdministrador)
+                    .addComponent(rbtnGeneral))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -723,7 +752,6 @@ public class FrmHerramietas extends javax.swing.JInternalFrame {
         cldFecha.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
 
         btnBuscarAuditoria.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        btnBuscarAuditoria.setIcon(new javax.swing.ImageIcon("C:\\tmp\\img\\BUSCAR.png")); // NOI18N
         btnBuscarAuditoria.setText("BUSCAR");
         btnBuscarAuditoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -801,195 +829,203 @@ public class FrmHerramietas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameClosing
 
     private void btmEditarFalladorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmEditarFalladorActionPerformed
-//        String descripcion;
-//        try {
-//            if (tblFallador.getSelectedRow() < 0) {
-//                JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun fallador de la tabla para poder editar");
-//                throw new NullPointerException("Debe seleccionarse un fallador de la tabla para poder editar");
-//            }
-//            descripcion = txtDescripcionFallador.getText().trim().toUpperCase();
-//            if (controladorFallador.modificar(descripcion, tblFallador.getSelectedRow())) {
-//                JOptionPane.showMessageDialog(null, "Se ha modificado un falldor con exito");
-//                tblFallador.setModel(controladorFallador.listar());
-//                txtDescripcionFallador.setText("");
-//            } else {
-//                JOptionPane.showMessageDialog(null, "No se ha podido modificar el fallador");
-//            }
-//        } catch (Exception e) {
-//            System.out.println("[ERROR] : " + e);
-//            JOptionPane.showMessageDialog(null, "Hubo un error al realizar la operación");
-//        }
+        String descripcion;
+        try {
+            if (tblFallador.getSelectedRow() < 0) {
+                JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun fallador de la tabla para poder editar");
+                throw new NullPointerException("Debe seleccionarse un fallador de la tabla para poder editar");
+            }
+            descripcion = txtDescripcionFallador.getText().trim().toUpperCase();
+            if (controladorFallador.modificar(descripcion, tblFallador.getSelectedRow())) {
+                JOptionPane.showMessageDialog(null, "Se ha modificado un falldor con exito");
+                tblFallador.setModel(controladorFallador.listar());
+                txtDescripcionFallador.setText("");
+                btnRegistrarFallador.setEnabled(true);
+                btmEditarFallador.setEnabled(false);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha podido modificar el fallador");
+            }
+        } catch (Exception e) {
+            System.out.println("[ERROR] : " + e);
+            JOptionPane.showMessageDialog(null, "Hubo un error al realizar la operación ["+e+"] contacte con el administador del sistema");
+        }
     }//GEN-LAST:event_btmEditarFalladorActionPerformed
 
     private void btnRegistrarFalladorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarFalladorActionPerformed
-//        String descripcion;
-//        try {
-//            descripcion = txtDescripcionFallador.getText().trim().toUpperCase();
-//            if (controladorFallador.registrar(descripcion)) {
-//                JOptionPane.showMessageDialog(null, "Se ha registrado el falldor con exito");
-//                tblFallador.setModel(controladorFallador.listar());
-//                txtDescripcionFallador.setText("");
-//            } else {
-//                JOptionPane.showMessageDialog(null, "No se ha podido registrar el fallador");
-//            }
-//        } catch (Exception e) {
-//            System.out.println("[ERROR] : " + e);
-//            JOptionPane.showMessageDialog(null, "Hubo un error al realizar la operación");
-//        }
+        String descripcion;
+        try {
+            descripcion = txtDescripcionFallador.getText().trim().toUpperCase();
+            if (controladorFallador.registrar(descripcion)) {
+                JOptionPane.showMessageDialog(null, "Se ha registrado el falldor con exito");
+                tblFallador.setModel(controladorFallador.listar());
+                txtDescripcionFallador.setText("");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha podido registrar el fallador");
+            }
+        } catch (Exception e) {
+            System.out.println("[ERROR] : " + e);
+            JOptionPane.showMessageDialog(null, "Hubo un error al realizar la operación ["+e+"] contacte con el administador del sistema");
+        }
     }//GEN-LAST:event_btnRegistrarFalladorActionPerformed
 
     private void btmEditarOfendidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmEditarOfendidoActionPerformed
-//        String descripcion;
-//        try {
-//            if (tblOfendido.getSelectedRow() < 0) {
-//                JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun ofendido de la tabla para poder editar");
-//                throw new NullPointerException("Debe seleccionarse un ofendido de la tabla para poder editar");
-//            }
-//            descripcion = txtDescripcionOfendido.getText().trim().toUpperCase();
-//            if (controladorOfendido.modificar(descripcion, tblOfendido.getSelectedRow())) {
-//                JOptionPane.showMessageDialog(null, "Se ha modificado un ofendido con exito");
-//                tblOfendido.setModel(controladorOfendido.listar());
-//                txtDescripcionOfendido.setText("");
-//            } else {
-//                JOptionPane.showMessageDialog(null, "No se ha podido modificar el ofendido");
-//            }
-//        } catch (Exception e) {
-//            System.out.println("[ERROR] : " + e);
-//            JOptionPane.showMessageDialog(null, "Hubo un error al realizar la operación");
-//        }
+        String descripcion;
+        try {
+            if (tblOfendido.getSelectedRow() < 0) {
+                JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun ofendido de la tabla para poder editar");
+                throw new NullPointerException("Debe seleccionarse un ofendido de la tabla para poder editar");
+            }
+            descripcion = txtDescripcionOfendido.getText().trim().toUpperCase();
+            if (controladorOfendido.modificar(descripcion, tblOfendido.getSelectedRow())) {
+                JOptionPane.showMessageDialog(null, "Se ha modificado un ofendido con exito");
+                tblOfendido.setModel(controladorOfendido.listar());
+                txtDescripcionOfendido.setText("");
+                btnRegistrarOfendido.setEnabled(true);
+                btmEditarOfendido.setEnabled(false);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha podido modificar el ofendido");
+            }
+        } catch (Exception e) {
+            System.out.println("[ERROR] : " + e);
+            JOptionPane.showMessageDialog(null, "Hubo un error al realizar la operación ["+e+"] contacte con el administador del sistema");
+        }
     }//GEN-LAST:event_btmEditarOfendidoActionPerformed
 
     private void btnRegistrarOfendidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarOfendidoActionPerformed
-//        String descripcion;
-//        try {
-//            descripcion = txtDescripcionOfendido.getText().trim().toUpperCase();
-//            if (controladorOfendido.registrar(descripcion)) {
-//                JOptionPane.showMessageDialog(null, "Se ha registrado el ofendido con exito");
-//                tblOfendido.setModel(controladorOfendido.listar());
-//                txtDescripcionOfendido.setText("");
-//            } else {
-//                JOptionPane.showMessageDialog(null, "No se ha podido registrar el ofendido");
-//            }
-//        } catch (Exception e) {
-//            System.out.println("[ERROR] : " + e);
-//            JOptionPane.showMessageDialog(null, "Hubo un error al realizar la operación");
-//        }
+        String descripcion;
+        try {
+            descripcion = txtDescripcionOfendido.getText().trim().toUpperCase();
+            if (controladorOfendido.registrar(descripcion)) {
+                JOptionPane.showMessageDialog(null, "Se ha registrado el ofendido con exito");
+                tblOfendido.setModel(controladorOfendido.listar());
+                txtDescripcionOfendido.setText("");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha podido registrar el ofendido");
+            }
+        } catch (Exception e) {
+            System.out.println("[ERROR] : " + e);
+            JOptionPane.showMessageDialog(null, "Hubo un error al realizar la operación ["+e+"] contacte con el administador del sistema");
+        }
     }//GEN-LAST:event_btnRegistrarOfendidoActionPerformed
 
     private void btmEditarDerechoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmEditarDerechoActionPerformed
-//        String descripcion;
-//        try {
-//            if (tblDerechos.getSelectedRow() < 0) {
-//                JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun derecho de la tabla para poder editar");
-//                throw new NullPointerException("Debe seleccionarse un derecho de la tabla para poder editar");
-//            }
-//            descripcion = txtDescripcionDerecho.getText().trim().toUpperCase();
-//            if (controladorDerechos.modificar(descripcion, tblDerechos.getSelectedRow())) {
-//                JOptionPane.showMessageDialog(null, "Se ha modificado un derecho con exito");
-//                tblDerechos.setModel(controladorDerechos.listar());
-//                txtDescripcionDerecho.setText("");
-//            } else {
-//                JOptionPane.showMessageDialog(null, "No se ha podido modificar el derecho");
-//            }
-//        } catch (Exception e) {
-//            System.out.println("[ERROR] : " + e);
-//            JOptionPane.showMessageDialog(null, "Hubo un error al realizar la operación");
-//        }
+        String descripcion;
+        try {
+            if (tblDerechos.getSelectedRow() < 0) {
+                JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun derecho de la tabla para poder editar");
+                throw new NullPointerException("Debe seleccionarse un derecho de la tabla para poder editar");
+            }
+            descripcion = txtDescripcionDerecho.getText().trim().toUpperCase();
+            if (controladorDerechos.modificar(descripcion, tblDerechos.getSelectedRow())) {
+                JOptionPane.showMessageDialog(null, "Se ha modificado un derecho con exito");
+                tblDerechos.setModel(controladorDerechos.listar());
+                txtDescripcionDerecho.setText("");
+                btnRegistrarDerechos.setEnabled(true);
+                btmEditarDerecho.setEnabled(false);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha podido modificar el derecho");
+            }
+        } catch (Exception e) {
+            System.out.println("[ERROR] : " + e);
+            JOptionPane.showMessageDialog(null, "Hubo un error al realizar la operación ["+e+"] contacte con el administador del sistema");
+        }
     }//GEN-LAST:event_btmEditarDerechoActionPerformed
 
     private void btnRegistrarDerechosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarDerechosActionPerformed
-//        String descripcion;
-//        try {
-//            descripcion = txtDescripcionDerecho.getText().trim().toUpperCase();
-//            if (controladorDerechos.registrar(descripcion)) {
-//                JOptionPane.showMessageDialog(null, "Se ha registrado el derecho con exito");
-//                tblDerechos.setModel(controladorDerechos.listar());
-//                txtDescripcionDerecho.setText("");
-//            } else {
-//                JOptionPane.showMessageDialog(null, "No se ha podido registrar el derecho");
-//            }
-//        } catch (Exception e) {
-//            System.out.println("[ERROR] : " + e);
-//            JOptionPane.showMessageDialog(null, "Hubo un error al realizar la operación");
-//        }
+        String descripcion;
+        try {
+            descripcion = txtDescripcionDerecho.getText().trim().toUpperCase();
+            if (controladorDerechos.registrar(descripcion)) {
+                JOptionPane.showMessageDialog(null, "Se ha registrado el derecho con exito");
+                tblDerechos.setModel(controladorDerechos.listar());
+                txtDescripcionDerecho.setText("");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha podido registrar el derecho");
+            }
+        } catch (Exception e) {
+            System.out.println("[ERROR] : " + e);
+            JOptionPane.showMessageDialog(null, "Hubo un error al realizar la operación ["+e+"] contacte con el administador del sistema");
+        }
     }//GEN-LAST:event_btnRegistrarDerechosActionPerformed
 
     private void btmEditarDelitosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmEditarDelitosActionPerformed
-//        String descripcion;
-//        String atributo1 = "-";
-//        String atributo2 = "-";
-//        String atributo3 = "-";
-//        String atributo4 = "-";
-//        try {
-//            if (tblDelitos.getSelectedRow() < 0) {
-//                JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun delito de la tabla para poder editar");
-//                throw new NullPointerException("Debe seleccionarse un delito de la tabla para poder editar");
-//            }
-//            descripcion = txtDescripcionD.getText().trim().toUpperCase();
-//            if (rbAtributoUno.isSelected()) {
-//                atributo1 = "D.38B";
-//            }
-//            if (rbAtributoDos.isSelected()) {
-//                atributo2 = "D.38G";
-//            }
-//            if (rbAtributoTres.isSelected()) {
-//                atributo3 = "LC.64";
-//            }
-//            if (rbAtributoCuatro.isSelected()) {
-//                atributo4 = "DCF";
-//            }
-//            if (controladorDelitos.modificar(descripcion, tblDelitos.getSelectedRow(), atributo1, atributo2, atributo3, atributo4)) {
-//                JOptionPane.showMessageDialog(null, "Se ha modificado un delito con exito");
-//                tblDelitos.setModel(controladorDelitos.listar());
-//                txtDescripcionD.setText("");
-//                rbAtributoUno.setSelected(false);
-//                rbAtributoDos.setSelected(false);
-//                rbAtributoTres.setSelected(false);
-//                rbAtributoCuatro.setSelected(false);
-//            } else {
-//                JOptionPane.showMessageDialog(null, "No se ha podido modificar el delito");
-//            }
-//        } catch (Exception e) {
-//            System.out.println("[ERROR] : " + e);
-//            JOptionPane.showMessageDialog(null, "Hubo un error al realizar la operación");
-//        }
+        String descripcion;
+        String atributo1 = "-";
+        String atributo2 = "-";
+        String atributo3 = "-";
+        String atributo4 = "-";
+        try {
+            if (tblDelitos.getSelectedRow() < 0) {
+                JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun delito de la tabla para poder editar");
+                throw new NullPointerException("Debe seleccionarse un delito de la tabla para poder editar");
+            }
+            descripcion = txtDescripcionD.getText().trim().toUpperCase();
+            if (rbAtributoUno.isSelected()) {
+                atributo1 = "D.38B";
+            }
+            if (rbAtributoDos.isSelected()) {
+                atributo2 = "D.38G";
+            }
+            if (rbAtributoTres.isSelected()) {
+                atributo3 = "LC.64";
+            }
+            if (rbAtributoCuatro.isSelected()) {
+                atributo4 = "DCF";
+            }
+            if (controladorDelitos.modificar(descripcion, tblDelitos.getSelectedRow(), atributo1, atributo2, atributo3, atributo4)) {
+                JOptionPane.showMessageDialog(null, "Se ha modificado un delito con exito");
+                tblDelitos.setModel(controladorDelitos.listar());
+                txtDescripcionD.setText("");
+                rbAtributoUno.setSelected(false);
+                rbAtributoDos.setSelected(false);
+                rbAtributoTres.setSelected(false);
+                rbAtributoCuatro.setSelected(false);
+                btnRegistrarDelitos.setEnabled(true);
+                btmEditarDelitos.setEnabled(false);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha podido modificar el delito");
+            }
+        } catch (Exception e) {
+            System.out.println("[ERROR] : " + e);
+            JOptionPane.showMessageDialog(null, "Hubo un error al realizar la operación ["+e+"] contacte con el administador del sistema");
+        }
     }//GEN-LAST:event_btmEditarDelitosActionPerformed
 
     private void btnRegistrarDelitosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarDelitosActionPerformed
-//        String descripcion;
-//        String atributo1 = "-";
-//        String atributo2 = "-";
-//        String atributo3 = "-";
-//        String atributo4 = "-";
-//        try {
-//            descripcion = txtDescripcionD.getText().trim().toUpperCase();
-//            if (rbAtributoUno.isSelected()) {
-//                atributo1 = "D.38B";
-//            }
-//            if (rbAtributoDos.isSelected()) {
-//                atributo2 = "D.38G";
-//            }
-//            if (rbAtributoTres.isSelected()) {
-//                atributo3 = "LC.64";
-//            }
-//            if (rbAtributoCuatro.isSelected()) {
-//                atributo4 = "DCF";
-//            }
-//            if (controladorDelitos.registrar(descripcion, atributo1, atributo2, atributo3, atributo4)) {
-//                JOptionPane.showMessageDialog(null, "Se ha registrado el delito con exito");
-//                tblDelitos.setModel(controladorDelitos.listar());
-//                txtDescripcionD.setText("");
-//                rbAtributoUno.setSelected(false);
-//                rbAtributoDos.setSelected(false);
-//                rbAtributoTres.setSelected(false);
-//                rbAtributoCuatro.setSelected(false);
-//            } else {
-//                JOptionPane.showMessageDialog(null, "No se ha podido registrar el delito");
-//            }
-//        } catch (Exception e) {
-//            System.out.println("[ERROR] : " + e);
-//            JOptionPane.showMessageDialog(null, "Hubo un error al realizar la operación");
-//        }
+        String descripcion;
+        String atributo1 = "-";
+        String atributo2 = "-";
+        String atributo3 = "-";
+        String atributo4 = "-";
+        try {
+            descripcion = txtDescripcionD.getText().trim().toUpperCase();
+            if (rbAtributoUno.isSelected()) {
+                atributo1 = "D.38B";
+            }
+            if (rbAtributoDos.isSelected()) {
+                atributo2 = "D.38G";
+            }
+            if (rbAtributoTres.isSelected()) {
+                atributo3 = "LC.64";
+            }
+            if (rbAtributoCuatro.isSelected()) {
+                atributo4 = "DCF";
+            }
+            if (controladorDelitos.registrar(descripcion, atributo1, atributo2, atributo3, atributo4)) {
+                JOptionPane.showMessageDialog(null, "Se ha registrado el delito con exito");
+                tblDelitos.setModel(controladorDelitos.listar());
+                txtDescripcionD.setText("");
+                rbAtributoUno.setSelected(false);
+                rbAtributoDos.setSelected(false);
+                rbAtributoTres.setSelected(false);
+                rbAtributoCuatro.setSelected(false);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha podido registrar el delito");
+            }
+        } catch (Exception e) {
+            System.out.println("[ERROR] : " + e);
+            JOptionPane.showMessageDialog(null, "Hubo un error al realizar la operación ["+e+"] contacte con el administador del sistema");
+        }
     }//GEN-LAST:event_btnRegistrarDelitosActionPerformed
 
     private void rbAtributoUnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbAtributoUnoActionPerformed
@@ -1005,11 +1041,71 @@ public class FrmHerramietas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtContrasenaKeyPressed
 
     private void btmEditarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmEditarUsuariosActionPerformed
-        // TODO add your handling code here:
+        String nombreU, pass, nombre, tipoUsuario;
+        try {
+            nombreU = txtUsuario.getText().trim();
+            pass = txtContrasena.getText().trim();
+            nombre = txtNombreCompleto.getText().trim();
+            if (rbtnAdministrador.isSelected()) {
+                tipoUsuario = "Admin";
+            } else if (rbtnGeneral.isSelected()) {
+                tipoUsuario = "General";
+            } else {
+                throw new NullPointerException("No se ha seleccionado el tipo de usuario.");
+            }
+            if (controladorUsuario.modificar(nombreU, pass, nombre, tipoUsuario)) {
+                JOptionPane.showMessageDialog(null, "Se ha modificado el usuario con exito");
+                txtUsuario.setText("");
+                txtNombreCompleto.setText("");
+                txtContrasena.setText("");
+                rbtnAdministrador.setSelected(false);
+                rbtnGeneral.setSelected(false);
+                gbtnTipoUsuario.clearSelection();
+                tblUsuarios.setModel(controladorUsuario.listar());
+                btnRegistrarUsuarios.setEnabled(true);
+                txtUsuario.setEnabled(true);
+                btmEditarUsuarios.setEnabled(false);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha podido modificar el usuario");
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Hubo un error al realizar la operación ["+e+"] contacte con el administador del sistema");
+            System.out.println("[Error] : "+e);
+        }
     }//GEN-LAST:event_btmEditarUsuariosActionPerformed
 
     private void btnRegistrarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarUsuariosActionPerformed
-        // TODO add your handling code here:
+        String nombreU, pass, nombre, tipoUsuario;
+        try {
+            if (txtUsuario.getText().trim().isEmpty() || txtContrasena.getText().trim().isEmpty() || txtNombreCompleto.getText().trim().isEmpty()) {
+                throw new NullPointerException("Se debe diligenciar debidamente el formulario");
+            }
+            nombreU = txtUsuario.getText().trim();
+            pass = txtContrasena.getText().trim();
+            nombre = txtNombreCompleto.getText().trim();
+            if (rbtnAdministrador.isSelected()) {
+                tipoUsuario = "Admin";
+            } else if (rbtnGeneral.isSelected()) {
+                tipoUsuario = "General";
+            } else {
+                throw new NullPointerException("No se ha seleccionado el tipo de usuario.");
+            }
+            if (controladorUsuario.registrar(nombreU, pass, nombre, tipoUsuario)) {
+                JOptionPane.showMessageDialog(null, "Se ha registrado el usuario con exito");
+                txtUsuario.setText("");
+                txtNombreCompleto.setText("");
+                txtContrasena.setText("");
+                rbtnAdministrador.setSelected(false);
+                rbtnGeneral.setSelected(false);
+                gbtnTipoUsuario.clearSelection();
+                tblUsuarios.setModel(controladorUsuario.listar());
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha podido registrar el usuario");
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Hubo un error al realizar la operación ["+e+"] contacte con el administador del sistema");
+            System.out.println("[Error] : "+e);
+        }
     }//GEN-LAST:event_btnRegistrarUsuariosActionPerformed
 
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
@@ -1036,6 +1132,8 @@ public class FrmHerramietas extends javax.swing.JInternalFrame {
         int row = tblFallador.getSelectedRow();
         if (row >= 0) {
             txtDescripcionFallador.setText(tblFallador.getValueAt(row, 0).toString());
+            btnRegistrarFallador.setEnabled(false);
+            btmEditarFallador.setEnabled(true);
         }
     }//GEN-LAST:event_tblFalladorMouseClicked
 
@@ -1043,6 +1141,8 @@ public class FrmHerramietas extends javax.swing.JInternalFrame {
         int row = tblOfendido.getSelectedRow();
         if (row >= 0) {
             txtDescripcionOfendido.setText(tblOfendido.getValueAt(row, 0).toString());
+            btnRegistrarOfendido.setEnabled(false);
+            btmEditarOfendido.setEnabled(true);
         }
     }//GEN-LAST:event_tblOfendidoMouseClicked
 
@@ -1050,37 +1150,33 @@ public class FrmHerramietas extends javax.swing.JInternalFrame {
         int row = tblDerechos.getSelectedRow();
         if (row >= 0) {
             txtDescripcionDerecho.setText(tblDerechos.getValueAt(row, 0).toString());
+            btnRegistrarDerechos.setEnabled(false);
+            btmEditarDerecho.setEnabled(true);
         }
     }//GEN-LAST:event_tblDerechosMouseClicked
 
     private void btnListarAuditoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarAuditoriasActionPerformed
-//        tblAuditoria.setModel(controladorAuditoria.listar(true));
-//        btnBuscarAuditoria.setEnabled(true);
+        tblAuditoria.setModel(controladorAuditoria.listar());
+        btnBuscarAuditoria.setEnabled(true);
     }//GEN-LAST:event_btnListarAuditoriasActionPerformed
 
     private void btnBuscarAuditoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarAuditoriaActionPerformed
-//        if (cldFecha.getDate() != null) {
-//            lstAuditorias = new ArrayList<>(lstAuditorias.stream().filter((JSONObject variable) -> new SimpleDateFormat("yyyy-MM-dd").format(new Date(Long.parseLong(variable.get("fecha").toString()))).contains(new SimpleDateFormat("yyyy-MM-dd").format(cldFecha.getDate()))).collect(Collectors.toList()));
-//        }
-//        if (!txtBuscarNombre.getText().isEmpty()) {
-//            lstAuditorias = new ArrayList<>(lstAuditorias.stream().filter(variable -> variable.get("persona").toString().contains(txtBuscarNombre.getText().trim())).collect(Collectors.toList()));
-//        }
-//        tblAuditoria.setModel(controladorAuditoria.listar(false));
-//        txtBuscarNombre.setText("");
-//        cldFecha.setDate(null);
-//        btnBuscarAuditoria.setEnabled(false);
+        tblAuditoria.setModel(controladorAuditoria.buscar(cldFecha.getDate(), txtBuscarNombre.getText().trim()));
+        btnBuscarAuditoria.setEnabled(false);
+        cldFecha.setDate(null);
+        txtBuscarNombre.setText("");
     }//GEN-LAST:event_btnBuscarAuditoriaActionPerformed
 
     private void btnListarFalladoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarFalladoresActionPerformed
-//        tblFallador.setModel(controladorFallador.listar());
+        tblFallador.setModel(controladorFallador.listar());
     }//GEN-LAST:event_btnListarFalladoresActionPerformed
 
     private void btnListarOfendidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarOfendidoActionPerformed
-//        tblOfendido.setModel(controladorOfendido.listar());
+        tblOfendido.setModel(controladorOfendido.listar());
     }//GEN-LAST:event_btnListarOfendidoActionPerformed
 
     private void btnListarFalladores1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarFalladores1ActionPerformed
-//        tblDerechos.setModel(controladorDerechos.listar());
+        tblDerechos.setModel(controladorDerechos.listar());
     }//GEN-LAST:event_btnListarFalladores1ActionPerformed
 
     private void tblDelitosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDelitosMouseClicked
@@ -1091,12 +1187,32 @@ public class FrmHerramietas extends javax.swing.JInternalFrame {
             rbAtributoDos.setSelected(!"-".equals(tblDelitos.getValueAt(row, 2).toString()));
             rbAtributoTres.setSelected(!"-".equals(tblDelitos.getValueAt(row, 3).toString()));
             rbAtributoCuatro.setSelected(!"-".equals(tblDelitos.getValueAt(row, 4).toString()));
+            btnRegistrarDelitos.setEnabled(false);
+            btmEditarDelitos.setEnabled(true);
         }
     }//GEN-LAST:event_tblDelitosMouseClicked
 
-    private void btnListarFalladores2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarFalladores2ActionPerformed
-//        tblDelitos.setModel(controladorDelitos.listar());
-    }//GEN-LAST:event_btnListarFalladores2ActionPerformed
+    private void btnListarDerechosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarDerechosActionPerformed
+        tblDelitos.setModel(controladorDelitos.listar());
+    }//GEN-LAST:event_btnListarDerechosActionPerformed
+
+    private void tblUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsuariosMouseClicked
+        int row = tblUsuarios.getSelectedRow();
+        if (row >= 0) {
+            txtUsuario.setText(tblUsuarios.getValueAt(row, 0).toString());
+            Usuario usuario = controladorUsuario.busrcar(txtUsuario.getText().trim());
+            txtContrasena.setText(usuario.getContrasena());
+            txtNombreCompleto.setText(usuario.getNombreCompleto());
+            if (usuario.getTipoUsuario().equalsIgnoreCase("admin")) {
+                rbtnAdministrador.setSelected(true);
+            }else if (usuario.getTipoUsuario().equalsIgnoreCase("general")) {
+                rbtnGeneral.setSelected(true);
+            }
+            txtUsuario.setEnabled(false);
+            btnRegistrarUsuarios.setEnabled(false);
+            btmEditarUsuarios.setEnabled(true);
+        }
+    }//GEN-LAST:event_tblUsuariosMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btmEditarDelitos;
@@ -1106,9 +1222,9 @@ public class FrmHerramietas extends javax.swing.JInternalFrame {
     private javax.swing.JButton btmEditarUsuarios;
     private javax.swing.JButton btnBuscarAuditoria;
     private javax.swing.JButton btnListarAuditorias;
+    private javax.swing.JButton btnListarDerechos;
     private javax.swing.JButton btnListarFalladores;
     private javax.swing.JButton btnListarFalladores1;
-    private javax.swing.JButton btnListarFalladores2;
     private javax.swing.JButton btnListarOfendido;
     private javax.swing.JButton btnRegistrarDelitos;
     private javax.swing.JButton btnRegistrarDerechos;
@@ -1116,11 +1232,13 @@ public class FrmHerramietas extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnRegistrarOfendido;
     private javax.swing.JButton btnRegistrarUsuarios;
     private com.toedter.calendar.JDateChooser cldFecha;
+    private javax.swing.ButtonGroup gbtnTipoUsuario;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
@@ -1147,6 +1265,8 @@ public class FrmHerramietas extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton rbAtributoDos;
     private javax.swing.JRadioButton rbAtributoTres;
     private javax.swing.JRadioButton rbAtributoUno;
+    private javax.swing.JRadioButton rbtnAdministrador;
+    private javax.swing.JRadioButton rbtnGeneral;
     private javax.swing.JTable tblAuditoria;
     private javax.swing.JTable tblDelitos;
     private javax.swing.JTable tblDerechos;
@@ -1162,6 +1282,17 @@ public class FrmHerramietas extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNombreCompleto;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
+
+    private void listar() {
+        tblFallador.setModel(controladorFallador.listar());
+        tblOfendido.setModel(controladorOfendido.listar());
+        tblDerechos.setModel(controladorDerechos.listar());
+        tblDelitos.setModel(controladorDelitos.listar());
+        tblAuditoria.setModel(controladorAuditoria.listar());
+        tblUsuarios.setModel(controladorUsuario.listar());
+        btnBuscarAuditoria.setEnabled(true);
+    }
+
     public void cerrar() {
         Object[] opciones = {"Aceptar", "Cancelar"};
         int eleccion = JOptionPane.showOptionDialog(rootPane, "¿Desea salir?", "Mensaje de confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, "Aceptar");

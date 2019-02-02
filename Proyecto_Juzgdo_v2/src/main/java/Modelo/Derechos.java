@@ -51,6 +51,15 @@ public class Derechos implements Serializable {
         this.idDerechos = idDerechos;
     }
 
+    public Derechos(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public Derechos(Integer idDerechos, String descripcion) {
+        this.idDerechos = idDerechos;
+        this.descripcion = descripcion;
+    }
+
     public Integer getIdDerechos() {
         return idDerechos;
     }

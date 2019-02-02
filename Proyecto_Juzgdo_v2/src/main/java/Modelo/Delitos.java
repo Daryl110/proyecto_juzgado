@@ -79,6 +79,15 @@ public class Delitos implements Serializable {
         this.atributoCuatro = atributoCuatro;
     }
 
+    public Delitos(Integer idDelitos, String descripcion, String atributoUno, String atributoDos, String atributoTres, String atributoCuatro) {
+        this.idDelitos = idDelitos;
+        this.descripcion = descripcion;
+        this.atributoUno = atributoUno;
+        this.atributoDos = atributoDos;
+        this.atributoTres = atributoTres;
+        this.atributoCuatro = atributoCuatro;
+    }
+
     public Integer getIdDelitos() {
         return idDelitos;
     }

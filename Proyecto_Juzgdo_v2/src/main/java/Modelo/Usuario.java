@@ -54,6 +54,13 @@ public class Usuario implements Serializable {
         this.nombreUsuario = nombreUsuario;
     }
 
+    public Usuario(String nombreUsuario, String contrasena, String nombreCompleto, String tipoUsuario) {
+        this.nombreUsuario = nombreUsuario;
+        this.contrasena = contrasena;
+        this.nombreCompleto = nombreCompleto;
+        this.tipoUsuario = tipoUsuario;
+    }
+
     public String getNombreUsuario() {
         return nombreUsuario;
     }
