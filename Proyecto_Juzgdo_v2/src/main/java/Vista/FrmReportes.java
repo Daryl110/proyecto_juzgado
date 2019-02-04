@@ -1,5 +1,6 @@
 package Vista;
 
+import Controlador.CtlReportes;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
@@ -11,8 +12,8 @@ import javax.swing.KeyStroke;
  *
  * @author sicg
  */
-public class FrmReportes extends javax.swing.JInternalFrame {
-
+public final class FrmReportes extends javax.swing.JInternalFrame {
+    
     public FrmReportes() {
         initComponents();
         try {
@@ -21,7 +22,7 @@ public class FrmReportes extends javax.swing.JInternalFrame {
             System.out.println("[Error] : " + e);
         }
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -133,7 +134,7 @@ public class FrmReportes extends javax.swing.JInternalFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 375, Short.MAX_VALUE)
+            .addGap(0, 362, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,7 +180,7 @@ public class FrmReportes extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnFichaTecnica)
@@ -195,29 +196,21 @@ public class FrmReportes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameClosing
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-//        int opcion = cbTipoBusqueda.getSelectedIndex();
-//        if (opcion != 0) {
-//            String valor = txtBusqueda.getText().trim();
-//            if (!valor.isEmpty()) {
-//                tblPena.setModel(new CtlReportes().buscar(opcion, valor));
-//            } else {
-//                JOptionPane.showMessageDialog(null, "Debe ingresar un valor para poder realizar la busqueda.");
-//            }
-//        } else {
-//            JOptionPane.showMessageDialog(null, "Debe seleccionar que es lo que desea buscar.");
-//        }
+        int opcion = cbTipoBusqueda.getSelectedIndex();
+        if (opcion != 0) {
+            String valor = txtBusqueda.getText().trim();
+            if (!valor.isEmpty()) {
+                tblPena.setModel(new CtlReportes().buscar(opcion, valor));
+            } else {
+                JOptionPane.showMessageDialog(null, "Debe ingresar un valor para poder realizar la busqueda.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar que es lo que desea buscar.");
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnFichaTecnicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFichaTecnicaActionPerformed
-//        String identificacion, ni;
-//        int row = tblPena.getSelectedRow();
-//        if (row >= 0) {
-//            identificacion = tblPena.getValueAt(row, 1) + "";
-//            ni = tblPena.getValueAt(row, 2) + "";
-//            new CtlReportes().generarFichaTecnica(identificacion, ni, row);
-//        } else {
-//            JOptionPane.showMessageDialog(null, "Debe seleccionar un condenado para poder vizualizar el reporte.");
-//        }
+        
     }//GEN-LAST:event_btnFichaTecnicaActionPerformed
 
 
@@ -241,17 +234,17 @@ public class FrmReportes extends javax.swing.JInternalFrame {
         } else {
         }
     }
-
+    
     public void cerrarVentana() {
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
                 KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "Cancel");
         getRootPane().getActionMap().put("Cancel", new AbstractAction() {
-
+            
             @Override
             public void actionPerformed(ActionEvent e) {
                 cerrar();
             }
         });
     }
-
+    
 }

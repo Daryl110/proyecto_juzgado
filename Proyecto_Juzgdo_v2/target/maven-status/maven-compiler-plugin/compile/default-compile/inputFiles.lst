@@ -3,6 +3,7 @@ C:\Users\Daryl\Documents\NetBeansProjects\Juzgado\Proyecto_Juzgdo_v2\src\main\ja
 C:\Users\Daryl\Documents\NetBeansProjects\Juzgado\Proyecto_Juzgdo_v2\src\main\java\Modelo\Situacionjuridica.java
 C:\Users\Daryl\Documents\NetBeansProjects\Juzgado\Proyecto_Juzgdo_v2\src\main\java\Controlador\CtlDerechos.java
 C:\Users\Daryl\Documents\NetBeansProjects\Juzgado\Proyecto_Juzgdo_v2\src\main\java\DAO\DAO.java
+C:\Users\Daryl\Documents\NetBeansProjects\Juzgado\Proyecto_Juzgdo_v2\src\main\java\Hilos\IniciadorServer.java
 C:\Users\Daryl\Documents\NetBeansProjects\Juzgado\Proyecto_Juzgdo_v2\src\main\java\Modelo\ProcesosAcumulados.java
 C:\Users\Daryl\Documents\NetBeansProjects\Juzgado\Proyecto_Juzgdo_v2\src\main\java\Controlador\CtlUsuario.java
 C:\Users\Daryl\Documents\NetBeansProjects\Juzgado\Proyecto_Juzgdo_v2\src\main\java\Modelo\Delitos.java
@@ -13,6 +14,7 @@ C:\Users\Daryl\Documents\NetBeansProjects\Juzgado\Proyecto_Juzgdo_v2\src\main\ja
 C:\Users\Daryl\Documents\NetBeansProjects\Juzgado\Proyecto_Juzgdo_v2\src\main\java\Modelo\Procesos.java
 C:\Users\Daryl\Documents\NetBeansProjects\Juzgado\Proyecto_Juzgdo_v2\src\main\java\Controlador\CtlAuditoria.java
 C:\Users\Daryl\Documents\NetBeansProjects\Juzgado\Proyecto_Juzgdo_v2\src\main\java\Controlador\CtlOfendido.java
+C:\Users\Daryl\Documents\NetBeansProjects\Juzgado\Proyecto_Juzgdo_v2\src\main\java\Controlador\CtlReportes.java
 C:\Users\Daryl\Documents\NetBeansProjects\Juzgado\Proyecto_Juzgdo_v2\src\main\java\Controlador\Main.java
 C:\Users\Daryl\Documents\NetBeansProjects\Juzgado\Proyecto_Juzgdo_v2\src\main\java\Modelo\PenaDelitos.java
 C:\Users\Daryl\Documents\NetBeansProjects\Juzgado\Proyecto_Juzgdo_v2\src\main\java\Modelo\TutelasDerechos.java
@@ -37,6 +39,9 @@ C:\Users\Daryl\Documents\NetBeansProjects\Juzgado\Proyecto_Juzgdo_v2\src\main\ja
 C:\Users\Daryl\Documents\NetBeansProjects\Juzgado\Proyecto_Juzgdo_v2\src\main\java\Modelo\Redencion.java
 C:\Users\Daryl\Documents\NetBeansProjects\Juzgado\Proyecto_Juzgdo_v2\src\main\java\Vista\Modales\FrmProceso.java
 C:\Users\Daryl\Documents\NetBeansProjects\Juzgado\Proyecto_Juzgdo_v2\src\main\java\Vista\FrmLogin.java
+C:\Users\Daryl\Documents\NetBeansProjects\Juzgado\Proyecto_Juzgdo_v2\src\main\java\Vista\FrmCarga.java
 C:\Users\Daryl\Documents\NetBeansProjects\Juzgado\Proyecto_Juzgdo_v2\src\main\java\Vista\Modales\FrmOrden.java
 C:\Users\Daryl\Documents\NetBeansProjects\Juzgado\Proyecto_Juzgdo_v2\src\main\java\Util\TextPrompt.java
+C:\Users\Daryl\Documents\NetBeansProjects\Juzgado\Proyecto_Juzgdo_v2\src\main\java\Hilos\Cargador.java
+C:\Users\Daryl\Documents\NetBeansProjects\Juzgado\Proyecto_Juzgdo_v2\src\main\java\Hilos\EstructuraHilo.java
 C:\Users\Daryl\Documents\NetBeansProjects\Juzgado\Proyecto_Juzgdo_v2\src\main\java\Modelo\Procesorequerido.java

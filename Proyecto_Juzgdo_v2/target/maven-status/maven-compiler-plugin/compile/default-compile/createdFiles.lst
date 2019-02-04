@@ -25,6 +25,7 @@ Vista\FrmHerramietas$25.class
 Modelo\Procesorequerido.class
 Modelo\Derechos_.class
 Modelo\Situacionjuridica_.class
+Controlador\CtlReportes.class
 Modelo\ProcesosAcumulados.class
 Vista\Modales\FrmProceso.class
 Vista\FrmHerramietas$12.class
@@ -76,6 +77,7 @@ Modelo\Sanciones.class
 Vista\FrmAvocase$6.class
 Vista\Modales\FrmProceso$5.class
 Modelo\Fallador.class
+Vista\FrmCarga.class
 Vista\Modales\FrmProceso$6.class
 Modelo\TutelasDerechos_.class
 Vista\FrmHerramietas$24.class
@@ -97,6 +99,7 @@ DAO\DAO.class
 Util\TextPrompt.class
 Vista\Modales\FrmDetenido$6.class
 Modelo\Procesorequerido_.class
+Hilos\EstructuraHilo.class
 Vista\FrmAvocase$8.class
 Vista\FrmAvocase$18.class
 Vista\Modales\FrmDetenido$8.class
@@ -109,6 +112,8 @@ Vista\Modales\FrmDetenido.class
 Vista\FrmHerramietas$9.class
 Vista\Modales\FrmDetenido$14.class
 Vista\Modales\FrmDetenido$5.class
+Hilos\Cargador.class
+Hilos\IniciadorServer.class
 Modelo\Conexion.class
 Controlador\CtlDelito.class
 Modelo\Derechos.class

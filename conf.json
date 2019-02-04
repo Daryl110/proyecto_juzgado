@@ -1,11 +1,13 @@
 {
-	"host" : "localhost",
+	"host" : "192.168.0.17",
 	"usuario" : "root",
-	"contrasena" : "",
+	"contrasena" : "123",
 	"driver" : "com.mysql.jdbc.Driver",
 	"servidorBD" : "mysql",
 	"dialecto" : "org.hibernate.dialect.MySQL5InnoDBDialect",
 	"showSql" : "true",
 	"formatSql" : "true",
-	"arquitecturaJpa" : "validate"
+	"arquitecturaJpa" : "validate",
+	"urlReportes" : "C:/tmp/proyecto_juzgado_reportes/",
+	"delayInicio" : 4
 }
