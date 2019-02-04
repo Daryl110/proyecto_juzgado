@@ -1,5 +1,5 @@
 ### Maven ###
-./Proyecto_Juzgdo_v2/target
+Proyecto_Juzgdo_v2/target
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
@@ -9,5 +9,5 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
-./IniciadorServers_juzgado/dist
-./IniciadorServers_juzgado/build
+IniciadorServers_juzgado/dist
+IniciadorServers_juzgado/build
