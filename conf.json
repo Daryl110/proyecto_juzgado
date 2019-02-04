@@ -1,0 +1,11 @@
+{
+	"host" : "localhost",
+	"usuario" : "root",
+	"contrasena" : "",
+	"driver" : "com.mysql.jdbc.Driver",
+	"servidorBD" : "mysql",
+	"dialecto" : "org.hibernate.dialect.MySQL5InnoDBDialect",
+	"showSql" : "true",
+	"formatSql" : "true",
+	"arquitecturaJpa" : "validate"
+}

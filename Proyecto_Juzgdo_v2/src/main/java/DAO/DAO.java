@@ -1,13 +1,11 @@
 package DAO;
 
 import Modelo.Conexion;
-import Util.Herramientas;
 import com.google.gson.Gson;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
-import javax.ws.rs.core.Response;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
