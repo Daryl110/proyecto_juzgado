@@ -1,13 +1,11 @@
 package DAO;
 
 import Modelo.Conexion;
-import com.google.gson.Gson;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 /**
  *
@@ -82,7 +80,7 @@ public class DAO implements IDAO {
             manager.getTransaction().begin();
             manager.persist(objeto);
             manager.getTransaction().commit();
-            joRespuesta.put("Registro", ((JSONObject) (new JSONParser().parse(new Gson().toJson(objeto)))));
+            joRespuesta.put("Registro", objeto);
             joRespuesta.put("Resultado", true);
         } catch (Exception e) {
             joRespuesta.put("Resultado", false);
@@ -104,7 +102,7 @@ public class DAO implements IDAO {
             manager.getTransaction().begin();
             manager.merge(objeto);
             manager.getTransaction().commit();
-            joRespuesta.put("Registro", ((JSONObject) (new JSONParser().parse(new Gson().toJson(objeto)))));
+            joRespuesta.put("Registro", objeto);
             joRespuesta.put("Resultado", true);
         } catch (Exception e) {
             joRespuesta.put("Resultado", false);
@@ -143,7 +141,7 @@ public class DAO implements IDAO {
             Object objeto = manager.merge(obj);
             manager.remove(objeto);
             manager.getTransaction().commit();
-            joRespuesta.put("Registro", ((JSONObject) (new JSONParser().parse(new Gson().toJson(obj)))));
+            joRespuesta.put("Registro", obj);
             joRespuesta.put("Resultado", true);
         } catch (Exception e) {
             joRespuesta.put("Resultado", false);
